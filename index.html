@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MD. Tipu Sultan — Senior iOS Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #080c10;
+    --bg2: #0d1117;
+    --bg3: #111820;
+    --surface: #141d27;
+    --surface2: #1a2535;
+    --blue: #007AFF;
+    --blue-dim: rgba(0,122,255,0.12);
+    --blue-glow: rgba(0,122,255,0.25);
+    --text: #f0f4f8;
+    --text2: #8b96a3;
+    --text3: #536070;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(0,122,255,0.2);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(8,12,16,0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--blue); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--blue); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-line {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,122,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,122,255,0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 80%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,122,255,0.12) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue-dim);
+    border: 1px solid var(--border2);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--blue);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    margin-bottom: 0.25em;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  h1 .accent { color: var(--blue); }
+
+  .hero-subtitle {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 500;
+    color: var(--text2);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--text2);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.75rem 1.75rem;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: #1a8aff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,122,255,0.4);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 4rem;
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+
+  .stat-item { text-align: left; }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .stat-number span { color: var(--blue); }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; position: relative; z-index: 1; }
+
+  .container { max-width: 980px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--blue);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 3rem;
+    line-height: 1.15;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg2); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    transition: all 0.25s;
+    cursor: default;
+  }
+
+  .skill-card:hover {
+    border-color: var(--border2);
+    background: var(--surface2);
+    transform: translateY(-4px);
+  }
+
+  .skill-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--blue-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.75rem;
+    font-size: 1.2rem;
+    color: var(--blue);
+  }
+
+  .skill-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .skill-tag {
+    font-size: 0.72rem;
+    color: var(--text3);
+    margin-top: 4px;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--bg); }
+
+  .timeline { position: relative; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--blue), transparent);
+  }
+
+  .timeline-item {
+    padding: 0 0 3rem 2.5rem;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 8px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--blue);
+  }
+
+  .timeline-item:first-child::before {
+    background: var(--blue);
+    box-shadow: 0 0 0 4px var(--blue-dim);
+  }
+
+  .exp-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-company {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .exp-badge {
+    font-size: 0.72rem;
+    background: var(--blue-dim);
+    color: var(--blue);
+    border: 1px solid var(--border2);
+    border-radius: 100px;
+    padding: 2px 10px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .exp-badge.current {
+    background: rgba(52,199,89,0.12);
+    color: #34C759;
+    border-color: rgba(52,199,89,0.25);
+  }
+
+  .exp-role {
+    font-size: 0.9rem;
+    color: var(--text2);
+    margin-bottom: 0.25rem;
+  }
+
+  .exp-period {
+    font-size: 0.8rem;
+    color: var(--text3);
+    margin-bottom: 1rem;
+  }
+
+  .exp-desc {
+    font-size: 0.9rem;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+
+  .exp-desc li {
+    margin-bottom: 0.35rem;
+    padding-left: 1rem;
+    position: relative;
+    list-style: none;
+  }
+
+  .exp-desc li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--blue);
+    font-size: 0.75rem;
+    top: 2px;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--bg2); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-decoration: none;
+  }
+
+  .project-card:hover {
+    border-color: var(--border2);
+    background: var(--surface2);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,122,255,0.1);
+  }
+
+  .project-icon-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .project-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  .project-arrow {
+    color: var(--text3);
+    font-size: 1rem;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .project-card:hover .project-arrow {
+    color: var(--blue);
+    transform: translate(3px, -3px);
+  }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+
+  .project-desc {
+    font-size: 0.87rem;
+    color: var(--text2);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    background: rgba(255,255,255,0.05);
+    color: var(--text2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 3px 10px;
+  }
+
+  .appstore-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* ── BANKING ── */
+  .banking-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    grid-column: 1 / -1;
+  }
+
+  .bank-logos {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .bank-pill {
+    background: var(--blue-dim);
+    border: 1px solid var(--border2);
+    color: var(--blue);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  /* ── PAPER ── */
+  #paper { background: var(--bg); }
+
+  .paper-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .paper-card:hover {
+    border-color: var(--border2);
+    background: var(--surface2);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,122,255,0.1);
+  }
+
+  .paper-icon {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 14px;
+    background: var(--blue-dim);
+    border: 1px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .paper-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    line-height: 1.35;
+  }
+
+  .paper-meta {
+    font-size: 0.82rem;
+    color: var(--text3);
+    margin-bottom: 0.75rem;
+  }
+
+  .paper-link-text {
+    font-size: 0.82rem;
+    color: var(--blue);
+    font-weight: 500;
+  }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--bg2); }
+
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .edu-icon {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 14px;
+    background: var(--blue-dim);
+    border: 1px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+
+  .edu-school {
+    font-size: 0.9rem;
+    color: var(--text2);
+    margin-bottom: 0.25rem;
+  }
+
+  .edu-year {
+    font-size: 0.8rem;
+    color: var(--text3);
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--bg); text-align: center; }
+
+  .contact-glow {
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(0,122,255,0.1) 0%, transparent 70%);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .contact-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--text2);
+    max-width: 420px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.65rem 1.4rem;
+    font-size: 0.9rem;
+    color: var(--text2);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .contact-item:hover {
+    border-color: var(--border2);
+    color: var(--blue);
+    transform: translateY(-2px);
+  }
+
+  .contact-item-icon { font-size: 1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--text3);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 0;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav { padding: 1rem; }
+    .nav-links { display: none; }
+    #hero { padding: 7rem 1.25rem 3rem; }
+    section { padding: 4rem 1.25rem; }
+    .hero-stats { gap: 1.5rem; }
+    .timeline::before { display: none; }
+    .timeline-item { padding-left: 0; }
+    .timeline-item::before { display: none; }
+    .paper-card { flex-direction: column; }
+    .edu-card { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Tipu<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-line"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Available for opportunities</div>
+    <h1>MD. Tipu<br><span class="accent">Sultan</span></h1>
+    <div class="hero-subtitle">Senior iOS Engineer</div>
+    <p class="hero-desc">
+      Crafting high-performance iOS applications with Swift, SwiftUI & UIKit.
+      From AI-powered apps to production-grade fintech — building experiences that matter.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View My Work →</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">5<span>+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">10<span>+</span></div>
+        <div class="stat-label">Apps Shipped</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Companies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label reveal">Core Expertise</div>
+    <div class="section-title reveal">Technical Skills</div>
+    <div class="skills-grid reveal">
+
+      <div class="skill-card">
+        <div class="skill-icon">🦅</div>
+        <div class="skill-name">Swift</div>
+        <div class="skill-tag">Primary Language</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📱</div>
+        <div class="skill-name">UIKit</div>
+        <div class="skill-tag">UI Framework</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">✦</div>
+        <div class="skill-name">SwiftUI</div>
+        <div class="skill-tag">Declarative UI</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-name">REST APIs</div>
+        <div class="skill-tag">Networking</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-name">Realm DB</div>
+        <div class="skill-tag">Local Storage</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🌿</div>
+        <div class="skill-name">Git</div>
+        <div class="skill-tag">Version Control</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">⌚</div>
+        <div class="skill-name">WatchOS</div>
+        <div class="skill-tag">Apple Watch</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-name">AI Integration</div>
+        <div class="skill-tag">LLM & APIs</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label reveal">Career</div>
+    <div class="section-title reveal">Work Experience</div>
+    <div class="timeline reveal">
+
+      <div class="timeline-item">
+        <div class="exp-meta">
+          <span class="exp-company">Right Tracks IT Limited</span>
+          <span class="exp-badge current">Current</span>
+        </div>
+        <div class="exp-role">Senior Software Engineer (iOS)</div>
+        <div class="exp-period">June 2025 – Present</div>
+        <ul class="exp-desc">
+          <li>Design, develop and maintain high-quality iOS applications using UIKit and SwiftUI.</li>
+          <li>Collaborate closely with backend engineers, designers and QA to deliver scalable, user-friendly features.</li>
+          <li>Lead feature development from planning to release, including debugging and performance optimization.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="exp-meta">
+          <span class="exp-company">FinTech HUB Limited</span>
+          <span class="exp-badge">Fintech</span>
+        </div>
+        <div class="exp-role">Senior Software Engineer (iOS)</div>
+        <div class="exp-period">July 2024 – July 2025</div>
+        <ul class="exp-desc">
+          <li>Developed and maintained secure, production-grade fintech iOS applications.</li>
+          <li>Worked cross-functionally with backend, product, design and QA teams on new features.</li>
+          <li>Owned feature development, bug fixing and technical decision-making across multiple modules.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="exp-meta">
+          <span class="exp-company">LEADS Corporation Limited</span>
+        </div>
+        <div class="exp-role">Senior Software Engineer (iOS)</div>
+        <div class="exp-period">December 2023 – June 2024</div>
+        <ul class="exp-desc">
+          <li>Built and maintained iOS applications using clean architecture and best practices.</li>
+          <li>Conducted code reviews, mentored junior developers and led feature implementation.</li>
+          <li>Successfully published and maintained multiple apps on the Apple App Store.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="exp-meta">
+          <span class="exp-company">BizMotion Limited</span>
+        </div>
+        <div class="exp-role">Software Engineer (iOS)</div>
+        <div class="exp-period">February 2022 – November 2023</div>
+        <ul class="exp-desc">
+          <li>Built and maintained iOS mobile apps collaborating closely with design and QA teams.</li>
+          <li>Contributed to feature development and bug fixing across production applications.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="exp-meta">
+          <span class="exp-company">Brain Craft Ltd</span>
+        </div>
+        <div class="exp-role">Junior Software Engineer</div>
+        <div class="exp-period">April 2021 – November 2021</div>
+        <ul class="exp-desc">
+          <li>Learning, analysing and working on software development to ensure quality.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label reveal">Live Work</div>
+    <div class="section-title reveal">Featured Projects</div>
+    <div class="projects-grid reveal">
+
+      <!-- ClarityCheck -->
+      <a href="https://apps.apple.com/us/app/claritycheck" target="_blank" class="project-card">
+        <div class="project-icon-row">
+          <div class="project-icon" style="background: rgba(0,122,255,0.15);">🔍</div>
+          <span class="project-arrow">↗</span>
+        </div>
+        <div>
+          <div class="project-name">ClarityCheck</div>
+          <div class="project-desc">Deep Search AI — an AI-powered iOS application that enables intelligent content discovery using modern AI workflows.</div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Swift</span>
+          <span class="tag">SwiftUI</span>
+          <span class="tag">AI</span>
+          <span class="tag">App Store</span>
+        </div>
+      </a>
+
+      <!-- PaintIt AI -->
+      <a href="https://apps.apple.com/us/app/paintit-ai" target="_blank" class="project-card">
+        <div class="project-icon-row">
+          <div class="project-icon" style="background: rgba(175,82,222,0.15);">🎨</div>
+          <span class="project-arrow">↗</span>
+        </div>
+        <div>
+          <div class="project-name">PaintIt AI</div>
+          <div class="project-desc">AI Image Generator — allows users to create and customise stunning images using prompt-driven AI models.</div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Swift</span>
+          <span class="tag">SwiftUI</span>
+          <span class="tag">Image Gen</span>
+          <span class="tag">App Store</span>
+        </div>
+      </a>
+
+      <!-- Water Now -->
+      <a href="https://apps.apple.com/sg/app/water-now" target="_blank" class="project-card">
+        <div class="project-icon-row">
+          <div class="project-icon" style="background: rgba(90,200,250,0.15);">💧</div>
+          <span class="project-arrow">↗</span>
+        </div>
+        <div>
+          <div class="project-name">Water Now</div>
+          <div class="project-desc">iOS & WatchOS app for tracking daily water intake with customisable goals, reminders and health-focused features.</div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Swift</span>
+          <span class="tag">SwiftUI</span>
+          <span class="tag">WatchOS</span>
+          <span class="tag">App Store</span>
+        </div>
+      </a>
+
+      <!-- Banking Apps -->
+      <div class="project-card banking-card" style="cursor: default;">
+        <div class="project-icon-row">
+          <div class="project-icon" style="background: rgba(52,199,89,0.15); width: auto; height: auto; border-radius: 0; font-size: 1rem; color: #34C759; font-weight: 600; font-family: 'Syne', sans-serif;">Banking Apps</div>
+        </div>
+        <div class="project-desc">Developed and maintained secure production-grade banking iOS apps with money transfer, mobile top-up, bill payments, authentication, and FDR/DPS account features.</div>
+        <div class="bank-logos">
+          <span class="bank-pill">FSIBL</span>
+          <span class="bank-pill">Jamuna Bank</span>
+          <span class="bank-pill">SJIBL</span>
+          <span class="bank-pill">Citizen Bank</span>
+          <span class="bank-pill">RAKUB</span>
+        </div>
+        <div class="project-tags" style="margin-top: 0.75rem;">
+          <span class="tag">UIKit</span>
+          <span class="tag">SwiftUI</span>
+          <span class="tag">RESTful APIs</span>
+          <span class="tag">Fintech</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONFERENCE PAPER -->
+<section id="paper">
+  <div class="container">
+    <div class="section-label reveal">Research</div>
+    <div class="section-title reveal">Conference Paper</div>
+    <a href="https://link.springer.com/chapter/10.1007/978-981-16-2641-853" target="_blank" class="paper-card reveal">
+      <div class="paper-icon">📄</div>
+      <div>
+        <div class="paper-title">An Automated Visa Prediction Technique for Higher Studies Using Machine Learning in the Context of Bangladesh</div>
+        <div class="paper-meta">Springer · January 2021</div>
+        <span class="paper-link-text">View on Springer →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label reveal">Academic</div>
+    <div class="section-title reveal">Education</div>
+    <div class="edu-card reveal">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Bachelor of Science in Computer Science & Engineering</div>
+        <div class="edu-school">Daffodil International University</div>
+        <div class="edu-year">2016 – 2020</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-glow"></div>
+  <div class="container" style="position: relative; z-index: 1;">
+    <div class="section-label reveal" style="text-align: center;">Let's Connect</div>
+    <div class="contact-title reveal">Get In Touch</div>
+    <p class="contact-sub reveal">Open to new opportunities, collaborations and interesting iOS projects.</p>
+    <div class="contact-links reveal">
+      <a href="mailto:tipu.diu.cse@gmail.com" class="contact-item">
+        <span class="contact-item-icon">✉</span> tipu.diu.cse@gmail.com
+      </a>
+      <a href="tel:+8801685471304" class="contact-item">
+        <span class="contact-item-icon">☎</span> +880 1685471304
+      </a>
+      <a href="https://github.com/mdtipusultan" target="_blank" class="contact-item">
+        <span class="contact-item-icon">◎</span> GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/md-tipu-sultan-a65839189/" target="_blank" class="contact-item">
+        <span class="contact-item-icon">in</span> LinkedIn
+      </a>
+    </div>
+    <a href="mailto:tipu.diu.cse@gmail.com" class="btn btn-primary reveal" style="display: inline-flex;">
+      Say Hello →
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & built with care · MD. Tipu Sultan © 2025</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = (i * 0.05) + 's';
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
