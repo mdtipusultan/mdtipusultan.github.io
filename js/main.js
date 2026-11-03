@@ -67,6 +67,12 @@
     });
   }
 
+  const PHONE_THEME = {
+    'paintit-ai': 'linear-gradient(165deg, #4a2a72 0%, #1a1028 70%)',
+    'water-now': 'linear-gradient(165deg, #1a6d8a 0%, #0c2430 70%)',
+    banking: 'linear-gradient(165deg, #1f6b42 0%, #0d2418 70%)',
+  };
+
   // ── Featured Apps ──
   function renderFeaturedApps() {
     const container = document.getElementById('featured-apps');
@@ -105,23 +111,43 @@
         })
       );
 
+      const theme = PHONE_THEME[app.id] || 'linear-gradient(165deg, #2c313a 0%, #14161a 70%)';
+
       card.appendChild(
-        el('div', { className: 'app-card-header' }, [
-          el('div', {
-            className: 'app-icon',
-            style: `background:${app.iconBg}`,
-            innerHTML: app.icon,
-          }),
-          el('div', {}, [
-            el('h3', { className: 'app-name', textContent: app.name }),
-            el('p', { className: 'app-subtitle', textContent: app.subtitle }),
+        el('div', { className: 'showcase-copy' }, [
+          el('p', { className: 'showcase-kicker', textContent: 'iOS App' }),
+          el('div', { className: 'app-card-header' }, [
+            el('div', {
+              className: 'app-icon',
+              style: `background:${app.iconBg}`,
+              innerHTML: app.icon,
+            }),
+            el('div', {}, [
+              el('h3', { className: 'app-name', textContent: app.name }),
+              el('p', { className: 'app-subtitle', textContent: app.subtitle }),
+            ]),
+          ]),
+          el('p', { className: 'app-desc', textContent: app.description }),
+          el('div', { className: 'project-tags', innerHTML: tagPills(app.technologies) }),
+          banks,
+          actions,
+        ])
+      );
+
+      card.appendChild(
+        el('div', { className: 'showcase-device', 'aria-hidden': 'true' }, [
+          el('div', { className: 'phone' }, [
+            el('div', { className: 'phone-screen', style: `background:${theme}` }, [
+              el('span', { className: 'phone-island' }),
+              el('div', { className: 'phone-app' }, [
+                el('div', { className: 'app-icon', style: `background:${app.iconBg}`, innerHTML: app.icon }),
+                el('p', { textContent: app.name }),
+                el('span', { textContent: app.subtitle || '' }),
+              ]),
+            ]),
           ]),
         ])
       );
-      card.appendChild(el('p', { className: 'app-desc', textContent: app.description }));
-      card.appendChild(el('div', { className: 'project-tags', innerHTML: tagPills(app.technologies) }));
-      if (banks) card.appendChild(banks);
-      card.appendChild(actions);
 
       card.addEventListener('click', () => openModal(app.id, 'app'));
       card.addEventListener('keydown', (e) => {
@@ -465,6 +491,48 @@
     updateActiveNav();
   }
 
+  // ── Role notepad ──
+  function initRoles() {
+    const sheet = document.getElementById('role-sheet');
+    if (!sheet) return;
+    const roles = ['iOS Engineer', 'SwiftUI Developer', 'FinTech Specialist'];
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let index = 0;
+    window.setInterval(() => {
+      sheet.classList.add('flip');
+      window.setTimeout(() => {
+        index = (index + 1) % roles.length;
+        sheet.textContent = roles[index];
+      }, 240);
+      window.setTimeout(() => sheet.classList.remove('flip'), 620);
+    }, 2800);
+  }
+
+  // ── Dhaka clock ──
+  function initClock() {
+    const node = document.getElementById('local-time');
+    if (!node) return;
+    const tick = () => {
+      const now = new Date();
+      const time = new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: 'Asia/Dhaka',
+      }).format(now);
+      const date = new Intl.DateTimeFormat('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        timeZone: 'Asia/Dhaka',
+      }).format(now);
+      node.textContent = `${time} · ${date}`;
+      node.setAttribute('datetime', now.toISOString());
+    };
+    tick();
+    window.setInterval(tick, 30000);
+  }
+
   // ── Init ──
   function init() {
     renderHeroTech();
@@ -477,6 +545,8 @@
     renderApproach();
     renderPipeline();
     renderAchievements();
+    initRoles();
+    initClock();
     initReveal();
     updateNav();
     window.addEventListener('scroll', updateNav, { passive: true });

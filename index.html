@@ -48,7 +48,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -65,65 +65,99 @@
 
     <ul class="nav-links" id="nav-menu" role="list">
       <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#expertise">Expertise</a></li>
-      <li><a href="#apps">Apps</a></li>
+      <li><a href="#apps">Work</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
+      <li><a href="#experience">Story</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+
+    <div class="nav-meta">
+      <span>Local time</span>
+      <time id="local-time">—</time>
+    </div>
   </nav>
   <div class="nav-overlay" aria-hidden="true"></div>
 
   <main>
     <!-- Hero -->
     <section id="hero" aria-labelledby="hero-heading">
-      <div class="hero-grid-line" aria-hidden="true"></div>
-      <div class="hero-glow" aria-hidden="true"></div>
-
       <div class="hero-inner">
         <div class="hero-text">
-          <div class="hero-badge">Available for opportunities</div>
-          <h1 id="hero-heading">MD. Tipu<br><span class="accent">Sultan</span></h1>
-          <p class="hero-subtitle">Senior iOS Software Engineer</p>
+          <p class="eyebrow"><span class="status-dot"></span> Senior iOS Engineer</p>
+          <h1 id="hero-heading">Hi, I'm Tipu.</h1>
+          <p class="hero-role-line">I am a</p>
+
+          <div class="notepad">
+            <div class="rings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="notepad-sheet" id="role-sheet">iOS Engineer</p>
+          </div>
+
           <p class="hero-tagline">Building secure, scalable, and high-quality native iOS applications with Swift, SwiftUI, and UIKit.</p>
 
           <div class="hero-tech" id="hero-tech" aria-label="Key technologies"></div>
 
           <div class="hero-cta">
-            <a href="#apps" class="btn btn-primary">View My Work</a>
-            <a href="https://github.com/mdtipusultan" class="btn btn-outline" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="#contact" class="btn btn-outline">Let's Connect</a>
+            <a href="#contact" class="btn btn-primary">Start a project <span class="btn-arrow" aria-hidden="true">→</span></a>
+            <a href="#apps" class="btn btn-ghost">See my work</a>
           </div>
         </div>
 
-        <div class="hero-visual" aria-hidden="true">
-          <div class="hero-photo-wrap">
-            <div class="hero-device-badge">
-              <span class="dot"></span>
-              iOS · Swift
-            </div>
-            <div class="hero-photo-frame">
-              <img
-                src="assets/profile-optimized.jpg"
-                alt="MD. Tipu Sultan — Senior iOS Software Engineer professional headshot"
-                class="hero-photo"
-                width="800"
-                height="1067"
-                loading="eager"
-                fetchpriority="high"
-              >
-            </div>
-            <div class="hero-code-snippet">
-              <span class="kw">func</span> <span class="fn">shipApp</span>() <span class="kw">async</span> {<br>
-              &nbsp;&nbsp;<span class="kw">let</span> app = <span class="type">App</span>(<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;arch: <span class="str">"MVVM"</span>,<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;secure: <span class="kw">true</span><br>
-              &nbsp;&nbsp;)<br>
-              &nbsp;&nbsp;<span class="kw">await</span> app.<span class="fn">launch</span>()<br>
-              }
+        <div class="hero-visual">
+          <div class="portrait">
+            <img
+              src="assets/profile-optimized.jpg"
+              alt="MD. Tipu Sultan — Senior iOS Software Engineer"
+              class="hero-photo"
+              width="800"
+              height="1067"
+              loading="eager"
+              fetchpriority="high"
+            >
+            <div class="portrait-hanger">
+              <span class="string"></span>
+              <span class="tag">Available</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="hero-status">
+        <span><span class="status-dot"></span> Available for work</span>
+        <span>Dhaka, Bangladesh</span>
+        <span>Remote-first · Native iOS</span>
+      </div>
+    </section>
+
+    <!-- Doors -->
+    <section id="doors" aria-labelledby="doors-heading">
+      <div class="container">
+        <h2 class="doors-title" id="doors-heading">The work lives behind the doors</h2>
+        <div class="door-row">
+          <a class="door door-apps" href="#apps">
+            <span class="door-face">
+              <span class="plate">Apps</span>
+              <span class="knob"></span>
+            </span>
+          </a>
+          <a class="door door-fintech" href="#expertise">
+            <span class="door-face">
+              <span class="plate">Expertise</span>
+              <span class="knob"></span>
+            </span>
+          </a>
+          <a class="door door-oss" href="#projects">
+            <span class="door-face">
+              <span class="plate">Projects</span>
+              <span class="knob"></span>
+            </span>
+          </a>
+          <a class="door door-story" href="#experience">
+            <span class="door-face">
+              <span class="plate">Story</span>
+              <span class="knob"></span>
+            </span>
+          </a>
         </div>
       </div>
     </section>
@@ -198,10 +232,14 @@
     <div class="divider" role="separator"></div>
 
     <!-- Experience -->
-    <section id="experience" class="bg-alt" aria-labelledby="experience-heading">
-      <div class="container">
-        <p class="section-label reveal">Career</p>
-        <h2 class="section-title reveal" id="experience-heading">Experience</h2>
+    <section id="experience" aria-labelledby="experience-heading">
+      <div class="container story-layout">
+        <div class="story-intro">
+          <p class="section-label reveal">My story</p>
+          <h2 class="section-title reveal" id="experience-heading">Let's go back in time.</h2>
+          <p class="story-year reveal">2026</p>
+          <p class="story-range reveal"><span class="status-dot"></span> 2021 — Present</p>
+        </div>
         <div class="timeline" id="experience-timeline"></div>
       </div>
     </section>
